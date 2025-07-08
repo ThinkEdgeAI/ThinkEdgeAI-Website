@@ -392,6 +392,20 @@
     });
   });
 </script>
+<!-- Add this before </body> at the bottom -->
+<style>
+  @media (max-width: 768px) {
+    iframe {
+      width: 70px !important;
+      height: 70px !important;
+      border-radius: 50% !important;
+      bottom: 15px !important;
+      right: 15px !important;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+  }
+</style>
+
 <!-- Chatbot Iframe -->
 <iframe 
   src="https://think-edge-ai.vercel.app/"
@@ -403,9 +417,9 @@
     height: 600px;
     border: none;
     z-index: 9999;
+    border-radius: 20px;
   "
   allow="clipboard-write"
 ></iframe>
-
 </body>
 </html>
