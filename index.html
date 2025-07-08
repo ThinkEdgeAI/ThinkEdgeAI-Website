@@ -408,7 +408,14 @@
     z-index: 10001;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+
+  #chat-toggle-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(108, 93, 211, 0.6);
+  }
+
 
   #chat-iframe {
     position: fixed;
