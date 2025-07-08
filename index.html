@@ -361,20 +361,27 @@
     <p>© 2025 ThinkEdgeAI</p>
   </footer>
 
- <script>
-console.log("✅ Script loaded");
+<script>
   window.addEventListener('DOMContentLoaded', () => {
+    console.log("✅ Script loaded");
+
     const form = document.getElementById('contact-form');
+    console.log("Form:", form);
+
+    if (!form) {
+      console.error("❌ Form not found!");
+      return;
+    }
+
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const btn = document.querySelector('#contact-form .submit-btn');
       const name = e.target.elements['name'].value.trim();
       const email = e.target.elements['email'].value.trim();
       const message = e.target.elements['message'].value.trim();
 
       const data = { name, email, message };
-      console.log("Sending data:", data); // should now show in console
+      console.log("Sending data:", data);
 
       const webhookUrl = "https://aldooo.app.n8n.cloud/webhook-test/013bdb0a-d453-4f85-8c9f-cceddf6b7651";
 
@@ -399,8 +406,8 @@ console.log("✅ Script loaded");
         alert("❌ Error: " + error.message);
       } finally {
         e.target.reset();
-        btn.textContent = 'Contact Our Team';
-        btn.disabled = false;
+        document.getElementById('submit-btn').textContent = 'Contact Our Team';
+        document.getElementById('submit-btn').disabled = false;
       }
     });
   });
