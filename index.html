@@ -394,31 +394,46 @@
 </script>
 <!--Iframe -->
 <style>
+  #chat-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #6C5DD3;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 10001;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
   #chat-iframe {
     position: fixed;
     bottom: 90px;
     right: 20px;
     width: 90vw;
     max-width: 400px;
-    height: 75vh;
+    height: 70vh;
     border: none;
     border-radius: 20px;
     display: none;
     z-index: 10000;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    overflow: hidden;
+    background-color: white; /* fallback */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 
   @media (max-width: 768px) {
     #chat-iframe {
       width: 95vw;
-      height: 90vh;
-      right: 10px;
+      height: 85vh;
       bottom: 80px;
+      right: 10px;
     }
   }
 </style>
-
 
 <!-- Chat Toggle Button -->
 <button id="chat-toggle-btn">💬</button>
@@ -429,6 +444,16 @@
   src="https://think-edge-ai.vercel.app/" 
   allow="clipboard-write"
 ></iframe>
+
+<script>
+  const toggleBtn = document.getElementById('chat-toggle-btn');
+  const chatIframe = document.getElementById('chat-iframe');
+
+  toggleBtn.addEventListener('click', () => {
+    const isVisible = chatIframe.style.display === 'block';
+    chatIframe.style.display = isVisible ? 'none' : 'block';
+  });
+</script>
 
 <script>
   const toggleBtn = document.getElementById('chat-toggle-btn');
