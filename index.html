@@ -393,32 +393,19 @@
   });
 </script>
 <!-- Chatbot Iframe -->
-<iframe
-  id="chatbot-frame"
-  src="https://think-edge-ai.vercel.app/?minimal=true"
+<iframe 
+  src="https://thinkedge-chat.vercel.app"
   style="
-    display: none;
     position: fixed;
-    bottom: 100px;
-    right: 24px;
-    width: 370px;
-    height: 520px;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    height: 550px;
     border: none;
-    border-radius: 20px;
-    box-shadow: 0 0 16px rgba(0,0,0,0.5);
     z-index: 9999;
-    background-color: transparent;
   "
+  allow="clipboard-write"
 ></iframe>
-
-<script>
-  const launcher = document.getElementById('chat-launcher');
-  const frame = document.getElementById('chatbot-frame');
-
-  launcher.addEventListener('click', () => {
-    frame.style.d
-
-
 
 </body>
 </html>
