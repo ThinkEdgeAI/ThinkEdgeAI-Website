@@ -381,6 +381,8 @@
       email: email,
       message: message
     };
+    
+console.log("Sending data:", data);
 
     try {
       const response = await fetch(webhookUrl, {
