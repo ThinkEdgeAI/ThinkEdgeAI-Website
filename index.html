@@ -362,36 +362,53 @@
   </footer>
 
   <script>
-  // Contact form logic
-  document.getElementById('contact-form').addEventListener('submit', function (e) {
+  document.getElementById('contact-form').addEventListener('submit', async function (e) {
     e.preventDefault();
+
     const btn = document.querySelector('#contact-form .submit-btn');
-    if (!btn) return;
-    btn.textContent = '✅ We’ve notified our team!';
+    const name = e.target.name.value.trim();
+    const email = e.target.email.value.trim();
+    const message = e.target.message.value.trim();
+
+    const webhookUrl = "https://aldooo.app.n8n.cloud/webhook-test/143304df-efe5-4f26-b1ce-0f8639e4a191"; // ← Replace this with your actual webhook
+
+    // Change button text and disable it
+    btn.textContent = '✅ Sending...';
     btn.disabled = true;
-    btn.style.background = '#444';
-    btn.style.transition = 'all 0.3s ease-in-out';
-    document.getElementById('form-message').style.display = 'block';
-    setTimeout(() => {
-      document.getElementById('form-message').style.display = 'none';
+
+    const data = {
+      name: name,
+      email: email,
+      message: message
+    };
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        document.getElementById('form-message').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('form-message').style.display = 'none';
+        }, 5000);
+      } else {
+        alert("❌ Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      alert("❌ Error: " + error.message);
+    } finally {
+      e.target.reset();
       btn.textContent = 'Contact Our Team';
       btn.disabled = false;
-      btn.style.background = 'linear-gradient(135deg, var(--purple), #a76cfa)';
-    }, 5000);
-    e.target.reset();
- });
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+    }
   });
 </script>
+
 <!--Iframe -->
 <style>
   #chat-toggle-btn {
