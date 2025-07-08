@@ -366,9 +366,10 @@
     e.preventDefault();
 
     const btn = document.querySelector('#contact-form .submit-btn');
-    const name = e.target.name.value.trim();
-    const email = e.target.email.value.trim();
-    const message = e.target.message.value.trim();
+const name = e.target.elements['name'].value.trim();
+const email = e.target.elements['email'].value.trim();
+const message = e.target.elements['message'].value.trim();
+
 
     const webhookUrl = "https://aldooo.app.n8n.cloud/webhook-test/013bdb0a-d453-4f85-8c9f-cceddf6b7651"; // ← Replace this with your actual webhook
 
