@@ -393,31 +393,68 @@
   });
 </script>
 <!--Iframe -->
-<iframe 
-  src="https://think-edge-ai.vercel.app/" 
-  style="
+<style>
+  #chat-toggle-btn {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 400px;
-    height: 600px;
+    width: 60px;
+    height: 60px;
+    background-color: #6C5DD3;
+    color: white;
     border: none;
-    outline: none;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 10001;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  #chat-iframe {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 90vw;
+    max-width: 400px;
+    height: 70vh;
+    border: none;
     border-radius: 20px;
-    background-color: transparent;
-    box-shadow: 0;
-    z-index: 9999;
-  "
+    display: none;
+    z-index: 10000;
+    background-color: white; /* fallback */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (max-width: 768px) {
+    #chat-iframe {
+      width: 95vw;
+      height: 85vh;
+      bottom: 80px;
+      right: 10px;
+    }
+  }
+</style>
+
+<!-- Chat Toggle Button -->
+<button id="chat-toggle-btn">💬</button>
+
+<!-- Iframe Chatbot -->
+<iframe 
+  id="chat-iframe" 
+  src="https://think-edge-ai.vercel.app/" 
   allow="clipboard-write"
-  
-iframe {
-  border: none !important;
-  outline: none !important;
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-}
 ></iframe>
+
+<script>
+  const toggleBtn = document.getElementById('chat-toggle-btn');
+  const chatIframe = document.getElementById('chat-iframe');
+
+  toggleBtn.addEventListener('click', () => {
+    const isVisible = chatIframe.style.display === 'block';
+    chatIframe.style.display = isVisible ? 'none' : 'block';
+  });
+</script>
+
 
 </body>
 </html>
