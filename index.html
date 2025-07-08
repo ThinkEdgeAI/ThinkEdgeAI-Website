@@ -361,54 +361,47 @@
     <p>© 2025 ThinkEdgeAI</p>
   </footer>
 
-  <script>
-  document.getElementById('contact-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
+ <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-    const btn = document.querySelector('#contact-form .submit-btn');
-const name = e.target.elements['name'].value.trim();
-const email = e.target.elements['email'].value.trim();
-const message = e.target.elements['message'].value.trim();
+      const btn = document.querySelector('#contact-form .submit-btn');
+      const name = e.target.elements['name'].value.trim();
+      const email = e.target.elements['email'].value.trim();
+      const message = e.target.elements['message'].value.trim();
 
+      const data = { name, email, message };
+      console.log("Sending data:", data); // should now show in console
 
-    const webhookUrl = "https://aldooo.app.n8n.cloud/webhook-test/013bdb0a-d453-4f85-8c9f-cceddf6b7651"; // ← Replace this with your actual webhook
+      const webhookUrl = "https://aldooo.app.n8n.cloud/webhook-test/013bdb0a-d453-4f85-8c9f-cceddf6b7651";
 
-    // Change button text and disable it
-    btn.textContent = '✅ Sending...';
-    btn.disabled = true;
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
 
-    const data = {
-      name: name,
-      email: email,
-      message: message
-    };
-    
-console.log("Sending data:", data);
-
-    try {
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        document.getElementById('form-message').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('form-message').style.display = 'none';
-        }, 5000);
-      } else {
-        alert("❌ Failed to send message. Please try again.");
+        if (response.ok) {
+          document.getElementById('form-message').style.display = 'block';
+          setTimeout(() => {
+            document.getElementById('form-message').style.display = 'none';
+          }, 5000);
+        } else {
+          alert("❌ Failed to send message. Please try again.");
+        }
+      } catch (error) {
+        alert("❌ Error: " + error.message);
+      } finally {
+        e.target.reset();
+        btn.textContent = 'Contact Our Team';
+        btn.disabled = false;
       }
-    } catch (error) {
-      alert("❌ Error: " + error.message);
-    } finally {
-      e.target.reset();
-      btn.textContent = 'Contact Our Team';
-      btn.disabled = false;
-    }
+    });
   });
 </script>
 
