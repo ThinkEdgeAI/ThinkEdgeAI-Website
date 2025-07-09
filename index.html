@@ -47,6 +47,7 @@ html, body {
   flex-direction: column;
   justify-content: center;
  scroll-margin-top: 100px;
+id="services" class="reveal">
 }
 
     nav {
@@ -282,6 +283,17 @@ html, body {
     transform: translateY(0);
   }
 }
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 </style>
 </head>
 <body>
@@ -707,6 +719,21 @@ html, body {
   input.addEventListener("keydown", e => {
     if (e.key === "Enter") sendMessage();
   });
+</script>
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+
+  const revealOnScroll = () => {
+    reveals.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        section.classList.add('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
 </script>
 
 </body>
