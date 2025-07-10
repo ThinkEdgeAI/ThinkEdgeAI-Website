@@ -1,3 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ThinkEdgeAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #121212;
+      --fg: #EEEEEE;
+      --grey: #888888;
+      --purple: #6C5DD3;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  scroll-padding-top: 80px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+
+    section {
+  border-radius: 80px;
+  margin: 20px auto;
+  max-width: 95%;
+  box-shadow: 0 0 20px rgba(108, 93, 211, 0.3);
+  
+  min-height: 100vh;
+  padding: 100px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(18, 18, 18, 0.9);
+      z-index: 1000;
+    }
+
+    nav a {
+      color: var(--fg);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--purple);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: url('https://img.freepik.com/free-vector/dark-wavy-background_23-2148388252.jpg') no-repeat center center / cover;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 18, 18, 0.6);
+      z-index: -1;
+    }
+
+    .shared-bg {
+      background: url('https://img.freepik.com/premium-photo/abstract-purple-color-wave-effect-express-emphasize-energetic-ripple-aig51_31965-627800.jpg?semt=ais_hybrid&w=740') no-repeat center center / cover;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shared-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 18, 18, 0.7);
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .hero p {
+      color: var(--grey);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .hero .cta-btn {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--purple), #a76cfa);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      color: white;
+      transition: all 0.4s ease-in-out;
+      animation: fadeIn 1.4s ease-out;
+      text-decoration: none;
+    }
+
+    .hero .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(108, 93, 211, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #services .cards {
+  z-index: 2;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  margin-top: 2rem;
+  padding: 0 2rem;
+  justify-items: center;
+  align-items: stretch;
+}
+
+    .card {
+  background: #1E1E1E;
+  padding: 1.5rem;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  transition: all 0.4s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+    .card:hover {
+  transform: translateY(-5px);
+  background: white;
+  color: black;
+}
+
+    .card h3 {
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: var(--grey);
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: 2rem auto 0;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      background: #1E1E1E;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: var(--fg);
+      font-size: 1rem;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--purple);
+      background: #222;
+    }
+
+    #form-message {
+      color: #90ee90;
+      font-weight: 500;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .cta-link {
+      margin-top: 2rem;
+      display: inline-block;
+      padding: 0.8rem 1.3rem;
+      background: var(--purple);
+      color: white;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: all 0.4s ease-in-out;
+      font-size: 0.95rem;
+    }
+
+    .cta-link:hover {
+      background: #5747A7;
+    }
+
+    .submit-btn {
+      margin-top: 1rem;
+      padding: 0.9rem 1.8rem;
+      background: linear-gradient(135deg, var(--purple), #a76cfa);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .submit-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(108, 93, 211, 0.4);
+    }
+
+    footer {
+      padding: 1rem;
+      text-align: center;
+      background: #1A1A1A;
+      color: var(--grey);
+    }
+    /* Minimalist scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--purple);
+      border-radius: 4px;
+    }
+
+    html, body {
+      overflow-x: hidden;
+    }
+  @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home" class="hero">
+    <h1>ThinkEdgeAI</h1>
+    <p>Building smarter workflows with AI automation and integration</p>
+    <a href="#services" class="cta-btn nav-link">Our Services</a>
+  </section>
+
+  <section id="about" class="shared-bg">
+  <h2>About ThinkEdgeAI</h2>
+  <p>We are a forward-thinking AI agency dedicated to unlocking business potential through innovative technology. At ThinkEdgeAI, we specialize in crafting intelligent automation systems that boost productivity, reduce manual workload, and accelerate growth. Our team blends creativity, strategy, and AI engineering to deliver tailored solutions that move the needle.</p>
+</section>
+
+<section id="services" style="background: url('https://wallpapercave.com/wp/wp14273227.jpg') no-repeat center center / cover; position: relative; z-index: 1;">
+  <h2>Our Services</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Chatbots</h3>
+      <p>Custom UI chatbots with advanced AI integration tailored to your brand and workflow.</p>
+    </div>
+    <div class="card">
+      <h3>Lead Generation</h3>
+      <p>Capture, qualify, and manage leads automatically with AI-driven systems.</p>
+    </div>
+    <div class="card">
+      <h3>CRM Automation</h3>
+      <p>Streamline customer relationship management with personalized automations.</p>
+    </div>
+    <div class="card">
+      <h3>Email Automation</h3>
+      <p>Automate email sequences and campaigns with smart triggers and personalized content.</p>
+    </div>
+    <div class="card">
+      <h3>Custom Workflows</h3>
+      <p>End-to-end business process automation built uniquely for your operations.</p>
+    </div>
+    <div class="card">
+      <h3>Consulting</h3>
+      <p>Get expert guidance to implement AI into your existing operations efficiently.</p>
+    </div>
+    <div class="card">
+      <h3>Integration</h3>
+      <p>We connect AI solutions with your existing tools like WhatsApp, CRMs, and more.</p>
+    </div>
+    <div class="card">
+      <h3>Analytics & Reporting</h3>
+      <p>Track performance, generate insights, and optimize results using AI-powered analytics.</p>
+    </div>
+  </div>
+  <a href="#contact" class="cta-link nav-link">Contact Us</a>
+    </section>
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>Let’s talk about how ThinkEdgeAI can help your business.</p>
+    <form id="contact-form" class="contact-form">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Your Name" required />
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Your Email" required />
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn" id="submit-btn">Contact Our Team</button>
+      <p id="form-message" style="display:none; margin-top: 1rem;">✅ Message sent! We'll get back to you soon.</p>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 ThinkEdgeAI</p>
+  </footer>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    console.log("✅ Script loaded");
+
+    const form = document.getElementById('contact-form');
+    console.log("Form:", form);
+
+    if (!form) {
+      console.error("❌ Form not found!");
+      return;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const name = e.target.elements['name'].value.trim();
+      const email = e.target.elements['email'].value.trim();
+      const message = e.target.elements['message'].value.trim();
+
+      const data = { name, email, message };
+      console.log("Sending data:", data);
+
+      const webhookUrl = "https://aldooo.app.n8n.cloud/webhook/013bdb0a-d453-4f85-8c9f-cceddf6b7651";
+
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          document.getElementById('form-message').style.display = 'block';
+          setTimeout(() => {
+            document.getElementById('form-message').style.display = 'none';
+          }, 5000);
+        } else {
+          alert("❌ Failed to send message. Please try again.");
+        }
+      } catch (error) {
+        alert("❌ Error: " + error.message);
+      } finally {
+        e.target.reset();
+        document.getElementById('submit-btn').textContent = 'Contact Our Team';
+        document.getElementById('submit-btn').disabled = false;
+      }
+    });
+  });
+</script>
+<!-- Add this to the bottom of your <body> -->
 <div id="chat-launcher">
   <span style="animation: fadeIcon 0.4s ease; display: inline-block;">🤖</span>
   <div id="chat-tooltip">Click here for a Chatbot!</div>
@@ -488,3 +905,7 @@ presetButtons.forEach(btn => {
   });
 });
 </script>
+
+
+</body>
+</html>
