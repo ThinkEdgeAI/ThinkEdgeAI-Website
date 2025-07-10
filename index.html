@@ -416,19 +416,28 @@ html, body {
 </script>
 <!-- Add this to the bottom of your <body> -->
 <div id="chat-launcher">
-  💬
+  <img id="launcher-icon" src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Chatbot" style="width:24px; height:24px;" />
+  <div id="chat-tooltip">Click here to try our chatbot!</div>
 </div>
 
 <div id="chat-container-wrapper">
   <div id="chat-container">
     <div id="chat-header">
-      <img src="https://i.imgur.com/VPWzyBV.png" alt="Logo" />
-      <span>ThinkEdge AI</span>
+  <div id="chat-title-badge">
+    <img src="https://i.imgur.com/VPWzyBV.png" alt="Logo" class="badge-logo" />
+    ThinkEdge AI
+  </div>
+      <div id="chat-close">&times;</div>
     </div>
     <div id="messages">
       <div class="message bot">👋 Hi! I'm your ThinkEdge AI assistant. How can I help you today?</div>
     </div>
-    <div id="input-area">
+    <div id="preset-buttons">
+  <button class="preset-btn">What services do you offer?</button>
+  <button class="preset-btn">Pricing for chatbots</button>
+</div>
+
+<div id="input-area">
       <input id="input" placeholder="Type your message..." autocomplete="off" />
       <button id="send">Send</button>
     </div>
@@ -480,14 +489,35 @@ html, body {
     transform: scale(1.1);
   }
 
+  #chat-tooltip {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: #d3d3d3;
+    color: #000;
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-weight: 500;
+    animation: tooltipFade 0.6s ease forwards;
+  }
+
+  @keyframes tooltipFade {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
   #chat-container-wrapper {
+  transition: transform 0.3s ease, opacity 0.3s ease;
     position: fixed;
     bottom: 95px;
     right: 25px;
     width: 400px;
     height: 580px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-    border-radius: 14px;
+    border-radius: 20px;
     background: var(--bg);
     display: none;
     flex-direction: column;
@@ -506,6 +536,8 @@ html, body {
     width: 100%;
     height: 100%;
     background: var(--bg);
+    border-radius: 20px;
+    overflow: hidden;
   }
 
   #chat-header {
@@ -514,7 +546,7 @@ html, body {
     color: white;
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
     border-bottom: 1px solid #2b2f3c;
   }
 
@@ -523,6 +555,32 @@ html, body {
     width: 40px;
     object-fit: cover;
     border-radius: 50%;
+  }
+
+  #chat-title-badge {
+    background: #2f3242;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    animation: bounceIn 0.5s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  @keyframes bounceIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  #chat-close {
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: auto;
+    padding-left: 12px;
   }
 
   #messages {
@@ -535,13 +593,17 @@ html, body {
   }
 
   .message {
-    max-width: 80%;
-    padding: 12px 16px;
-    border-radius: 14px;
-    font-size: 15px;
-    line-height: 1.4;
-    animation: slideIn 0.3s ease;
-  }
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 20px;
+  font-size: 15px;
+  line-height: 1.4;
+  animation: slideIn 0.3s ease;
+  font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-clip: padding-box;
+}
+}
 
   @keyframes slideIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -586,6 +648,12 @@ html, body {
     color: white;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  #send:hover {
+    transform: scale(1.05);
+    background: #7b72f0;
   }
 
   .typing-indicator {
@@ -621,6 +689,60 @@ html, body {
     0%, 80%, 100% { transform: scale(0); }
     40% { transform: scale(1); }
   }
+
+  @keyframes fadeIcon {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+.badge-logo {
+    height: 28px;
+    width: 28px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+.preset-btn {
+  background: var(--user);
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+  max-width: 80%;
+  text-align: left;
+  align-self: flex-end;
+  animation: slideIn 0.3s ease;
+}
+
+.preset-btn:hover {
+  background: #3d4257;
+}
+#preset-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+}
+
+.preset-btn {
+  background: #2f3242;
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+  text-align: left;
+}
+
+.preset-btn:hover {
+  background: #3d4257;
+}
 </style>
 
 <script>
@@ -629,7 +751,9 @@ html, body {
   const input = document.getElementById("input");
   const send = document.getElementById("send");
   const messages = document.getElementById("messages");
-  const webhookURL = "https://aldooo.app.n8n.cloud/webhook/chatbot";//CHATBOTURLURLURLURLURLURLURLURLRULRULRULRULRULRULRURRLRURLURURURUURURURLURUR
+  const tooltip = document.getElementById("chat-tooltip");
+  const closeBtn = document.getElementById("chat-close");
+  const webhookURL = "https://aldooo.app.n8n.cloud/webhook/chatbot";
 
   function getCookie(name) {
     const cookies = document.cookie.split(';');
@@ -650,20 +774,49 @@ html, body {
     sessionId = `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
     setCookie("sessionId", sessionId, 1);
   }
-  console.log("Session ID:", sessionId);
 
   launcher.onclick = () => {
-    wrapper.style.display = wrapper.style.display === "flex" ? "none" : "flex";
+  const isOpen = wrapper.style.display === "flex";
+
+  if (isOpen) {
+    wrapper.style.transform = 'scale(0.9)';
+    wrapper.style.opacity = '0';
+    setTimeout(() => {
+      wrapper.style.display = "none";
+      wrapper.style.transform = 'scale(1)';
+      wrapper.style.opacity = '1';
+      launcher.innerHTML = '<img id="launcher-icon" src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Chatbot" style="width:24px; height:24px; animation: fadeIcon 0.3s ease;" />';
+    }, 250);
+  } else {
+    wrapper.style.display = "flex";
+    launcher.innerHTML = '<span id="launcher-icon" style="animation: fadeIcon 0.3s ease;">💬</span>';
+  }
+
+  if (tooltip) tooltip.style.display = "none";
+};
+
+  if (closeBtn) {
+  closeBtn.onclick = () => {
+    wrapper.style.transform = 'scale(0.9)';
+    wrapper.style.opacity = '0';
+    setTimeout(() => {
+      wrapper.style.display = "none";
+      wrapper.style.transform = 'scale(1)';
+      wrapper.style.opacity = '1';
+      launcher.innerHTML = '<img id="launcher-icon" src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Chatbot" style="width:24px; height:24px; animation: fadeIcon 0.3s ease;" />';
+    }, 250);
   };
+}
 
   function addMessage(text, sender = "user") {
-    const div = document.createElement("div");
-    div.className = `message ${sender}`;
-    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-    div.innerHTML = text;
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-  }
+  const div = document.createElement("div");
+  div.className = `message ${sender}`;
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  div.innerHTML = text;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
 
   function showTyping() {
     const typing = document.createElement("div");
@@ -680,6 +833,8 @@ html, body {
   }
 
   async function sendMessage() {
+    const presetContainer = document.getElementById("preset-buttons");
+    if (presetContainer) presetContainer.style.display = "none";
     const text = input.value.trim();
     if (!text) return;
 
@@ -704,8 +859,19 @@ html, body {
 
   send.onclick = sendMessage;
   input.addEventListener("keydown", e => {
-    if (e.key === "Enter") sendMessage();
+  if (e.key === "Enter") sendMessage();
+});
+
+// Preset button listeners
+const presetButtons = document.querySelectorAll(".preset-btn");
+presetButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    input.value = btn.textContent;
+    sendMessage();
+    const presetContainer = document.getElementById("preset-buttons");
+    if (presetContainer) presetContainer.style.display = "none";
   });
+});
 </script>
 
 </body>
